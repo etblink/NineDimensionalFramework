@@ -69,6 +69,65 @@ def create_field_lines(Ex, Ey, Ez, Bx, By, Bz, density=10):
 
     return fig
 
+def create_toroidal_flow_visualization(x, y, z, vx, vy, vz, density=20):
+    """Create visualization of toroidal energy flows"""
+    # Create a grid for the vector field
+    x_grid = np.linspace(x.min(), x.max(), density)
+    y_grid = np.linspace(y.min(), y.max(), density)
+    z_grid = np.linspace(z.min(), z.max(), density)
+    X, Y, Z = np.meshgrid(x_grid, y_grid, z_grid)
+
+    # Interpolate vector field to grid points
+    VX = np.interp(X.flatten(), x.flatten(), vx.flatten()).reshape(X.shape)
+    VY = np.interp(Y.flatten(), y.flatten(), vy.flatten()).reshape(Y.shape)
+    VZ = np.interp(Z.flatten(), z.flatten(), vz.flatten()).reshape(Z.shape)
+
+    fig = go.Figure()
+
+    # Add streamlines using cone plot
+    fig.add_trace(go.Cone(
+        x=X.flatten(),
+        y=Y.flatten(),
+        z=Z.flatten(),
+        u=VX.flatten(),
+        v=VY.flatten(),
+        w=VZ.flatten(),
+        colorscale='Viridis',
+        name='Energy Flow',
+        sizeref=0.5,
+        sizemode='absolute'
+    ))
+
+    # Add a semi-transparent isosurface to show the toroidal structure
+    r = np.sqrt(X**2 + Y**2 + Z**2)
+    fig.add_trace(go.Isosurface(
+        x=X.flatten(),
+        y=Y.flatten(),
+        z=Z.flatten(),
+        value=r.flatten(),
+        isomin=0.5,
+        isomax=2.0,
+        opacity=0.3,
+        colorscale='Plasma',
+        name='Toroidal Structure'
+    ))
+
+    fig.update_layout(
+        title='Toroidal Energy Flows',
+        scene=dict(
+            xaxis_title='X',
+            yaxis_title='Y',
+            zaxis_title='Z',
+            camera=dict(
+                eye=dict(x=1.5, y=1.5, z=1.5)
+            )
+        ),
+        width=800,
+        height=800
+    )
+
+    return fig
+
 def create_wave_function_plot(psi_4d):
     """Create visualization of wave function magnitude"""
     # Average over time dimension to get 3D slice

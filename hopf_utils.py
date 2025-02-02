@@ -51,3 +51,36 @@ def compute_field_strength(x, y, z, alpha=1.0):
     B = alpha * np.exp(-r) * (1 + 0.5*np.cos(phi))
 
     return E, B
+
+def generate_toroidal_flow(x, y, z, n_layers=3):
+    """Generate nested toroidal flow vectors"""
+    # Calculate cylindrical coordinates
+    r = np.sqrt(x**2 + y**2)
+    theta = np.arctan2(y, x)
+
+    # Initialize flow vectors
+    v_x = np.zeros_like(x)
+    v_y = np.zeros_like(y)
+    v_z = np.zeros_like(z)
+
+    # Generate nested toroidal flows
+    for i in range(n_layers):
+        # Scale factor for each layer
+        scale = 1.0 / (i + 1)
+
+        # Toroidal component (circulation around the minor radius)
+        v_x += -scale * y / (r + 1e-6)
+        v_y += scale * x / (r + 1e-6)
+
+        # Poloidal component (circulation around the major radius)
+        v_x += scale * x * z / (r + 1e-6)**2
+        v_y += scale * y * z / (r + 1e-6)**2
+        v_z += -scale * r / (r + 1e-6)
+
+    # Normalize vectors
+    magnitude = np.sqrt(v_x**2 + v_y**2 + v_z**2)
+    v_x /= (magnitude + 1e-6)
+    v_y /= (magnitude + 1e-6)
+    v_z /= (magnitude + 1e-6)
+
+    return v_x, v_y, v_z
