@@ -43,8 +43,22 @@ def project_to_4d(grid_points=50):
 
 def compute_em_fields(psi_4d):
     """Compute electromagnetic fields from 4D wave function"""
-    # Take gradients for E and B fields
-    Ex, Ey, Ez = np.gradient(np.real(psi_4d))
-    Bx, By, Bz = np.gradient(np.imag(psi_4d))
+    # Average over time dimension to get 3D fields
+    psi_3d = np.mean(psi_4d, axis=-1)
+
+    # Calculate gradients for real and imaginary parts
+    grad_real = np.gradient(np.real(psi_3d))
+    grad_imag = np.gradient(np.imag(psi_3d))
+
+    # Extract E and B field components
+    Ex, Ey, Ez = grad_real
+    Bx, By, Bz = grad_imag
+
+    # Normalize field strengths
+    E_norm = np.sqrt(Ex**2 + Ey**2 + Ez**2)
+    B_norm = np.sqrt(Bx**2 + By**2 + Bz**2)
+
+    Ex, Ey, Ez = [E/E_norm.max() for E in (Ex, Ey, Ez)]
+    Bx, By, Bz = [B/B_norm.max() for B in (Bx, By, Bz)]
 
     return (Ex, Ey, Ez), (Bx, By, Bz)
