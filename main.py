@@ -67,15 +67,68 @@ with col2:
     st.plotly_chart(fig_wave, use_container_width=True)
 
 st.markdown("""
-### About this Visualization
-This tool visualizes the 9-dimensional Hopf fibration model and its projections to observable physics:
+### Mathematical Foundations & Fundamental Forces
 
-1. **Hopf Fibration**: Shows the projection of the higher-dimensional structure to 3D space
-2. **Toroidal Energy Flows**: Displays nested toroidal vortex structures that represent energy circulation
-3. **Electromagnetic Fields**: Shows the emergent electromagnetic field structure
-4. **Wave Function**: Visualizes the magnitude of the projected wave function
+#### 1. Hopf Fibration Equations
+The 9D Hopf fibration is described by the mapping S⁸ → S⁴ with fiber S³. The fundamental equations are:
 
-The toroidal flows represent how energy circulates through the Hopf fibration structure, with nested patterns demonstrating the self-similar, fractal nature of the system. These flows are fundamental to understanding how the 9D structure gives rise to observable physical phenomena.
+$\\Phi: S^8 \\rightarrow S^4$
 
-Use the sidebar controls to adjust various parameters and explore how they affect the visualizations.
+For coordinates $(z_1, z_2, z_3, z_4) \\in \\mathbb{C}^4 \\cong \\mathbb{R}^8$, the fibration is given by:
+
+$h(z_1, z_2, z_3, z_4) = (2(z_1\\bar{z_2} + z_3\\bar{z_4}), |z_1|^2 + |z_3|^2 - |z_2|^2 - |z_4|^2)$
+
+#### 2. Wave Function & Quantum States
+The 9D wave function $\\Psi$ incorporates both spatial and internal symmetry dimensions:
+
+$\\Psi(\\mathbf{x}, t) = R(r)Y_{lm}(\\theta, \\phi)T(\\alpha, \\beta, \\gamma)e^{-iEt/\\hbar}$
+
+where:
+- $R(r)$ is the radial function
+- $Y_{lm}$ are spherical harmonics
+- $T(\\alpha, \\beta, \\gamma)$ represents internal symmetries
+- $E$ is the energy eigenvalue
+
+#### 3. Electromagnetic Field Emergence
+The electromagnetic fields emerge from the projection of the Hopf fibration through:
+
+$F_{\\mu\\nu} = \\partial_{\\mu}A_{\\nu} - \\partial_{\\nu}A_{\\mu}$
+
+where the potential $A_{\\mu}$ is derived from the fibration projection:
+
+$A_{\\mu} = \\frac{i}{2}(\\bar{\\psi}\\partial_{\\mu}\\psi - \\psi\\partial_{\\mu}\\bar{\\psi})$
+
+#### 4. Toroidal Flow Dynamics
+The toroidal flows represent energy circulation patterns described by:
+
+$\\mathbf{v}(\\mathbf{r}) = \\nabla \\times (\\psi\\mathbf{B}) + \\nabla \\times \\nabla \\times (\\phi\\mathbf{B})$
+
+where:
+- $\\psi$ is the poloidal flux function
+- $\\phi$ is the toroidal flux function
+- $\\mathbf{B}$ is the background magnetic field
+
+#### 5. Fundamental Forces
+The four fundamental forces emerge through symmetry breaking of the higher-dimensional structure:
+
+1. **Electromagnetic Force**:
+   $U(1)$ symmetry: $F_{em} \\propto \\frac{q_1q_2}{r^2}$
+
+2. **Strong Nuclear Force**:
+   $SU(3)$ symmetry: $V_{strong}(r) = -\\frac{\\alpha_s\\hbar c}{r} + kr$
+
+3. **Weak Nuclear Force**:
+   $SU(2)$ symmetry: $F_{weak} \\propto G_F(\\bar{\\psi}\\gamma^\\mu\\psi)(\\bar{\\psi}\\gamma_\\mu\\psi)$
+
+4. **Gravitational Force**:
+   Emergent from metric distortions: $F_g = -G\\frac{m_1m_2}{r^2}$
+
+#### Interactive Visualization Controls
+Use the sidebar controls to explore:
+- Rotation angles for different projections of the Hopf fibration
+- Wave function parameters affecting field strengths
+- Toroidal flow characteristics and nested structures
+- Field visualization density and scale parameters
+
+The visualizations above demonstrate how these mathematical structures give rise to observable physical phenomena through dimensional reduction and symmetry breaking.
 """)
