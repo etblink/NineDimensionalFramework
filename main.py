@@ -69,59 +69,65 @@ with col2:
 st.markdown("""
 ### Mathematical Foundations & Fundamental Forces
 
-#### 1. Hopf Fibration Equations
-The 9D Hopf fibration is described by the mapping S⁸ → S⁴ with fiber S³. The fundamental equations are:
+#### 1. 9D Wave Function Evolution
+The fundamental evolution equation in its most advanced form:
 
-$\\Phi: S^8 \\rightarrow S^4$
+$□_{9D}Ψ + ξR_9(Ψ)Ψ + λ(Ψ)Ψ^3 + η(Ψ)Ψ^5 + α(Ψ)□^2Ψ + ΔΨ_{NP} = ξ_{stoch}(x,t)$
 
-For coordinates $(z_1, z_2, z_3, z_4) \\in \\mathbb{C}^4 \\cong \\mathbb{R}^8$, the fibration is given by:
+where $□_{9D}$ is the 9D d'Alembert operator, $ξ$ couples the wave function to curvature, $λ(Ψ)$ and $η(Ψ)$ are nonlinear self-interaction couplings, and $ξ_{stoch}(x,t)$ is a stochastic term.
 
-$h(z_1, z_2, z_3, z_4) = (2(z_1\\bar{z_2} + z_3\\bar{z_4}), |z_1|^2 + |z_3|^2 - |z_2|^2 - |z_4|^2)$
+#### 2. Dynamically Adjusted Ricci Scalar
+The 9D Ricci scalar incorporates quantum informational content:
 
-#### 2. Wave Function & Quantum States
-The 9D wave function $\\Psi$ incorporates both spatial and internal symmetry dimensions:
+$R_9(Ψ) = R_{9AdS} + ζ\\tanh(κΨ) + ϵS_{ent}(x)$
 
-$\\Psi(\\mathbf{x}, t) = R(r)Y_{lm}(\\theta, \\phi)T(\\alpha, \\beta, \\gamma)e^{-iEt/\\hbar}$
+where $S_{ent}(x) = -γ\\ln|Ψ(x)|$
 
-where:
-- $R(r)$ is the radial function
-- $Y_{lm}$ are spherical harmonics
-- $T(\\alpha, \\beta, \\gamma)$ represents internal symmetries
-- $E$ is the energy eigenvalue
+With nonperturbative modifications:
 
-#### 3. Electromagnetic Field Emergence
-The electromagnetic fields emerge from the projection of the Hopf fibration through:
+$R_{9NP} = R_9(Ψ) + σ\\sum_ℓ Δℓ^2$
 
-$F_{\\mu\\nu} = \\partial_{\\mu}A_{\\nu} - \\partial_{\\nu}A_{\\mu}$
+#### 3. Nonperturbative Corrections
+Path integral backreaction is represented by:
 
-where the potential $A_{\\mu}$ is derived from the fibration projection:
+$ΔΨ_{NP} = \\int e^{-S_{eff}/ℏ}dS_{eff}$
 
-$A_{\\mu} = \\frac{i}{2}(\\bar{\\psi}\\partial_{\\mu}\\psi - \\psi\\partial_{\\mu}\\bar{\\psi})$
+#### 4. 4D Projection & Electromagnetic Fields
+The 4D projection of the wave function in spherical coordinates $(r,θ,φ)$ and time $t$:
 
-#### 4. Toroidal Flow Dynamics
-The toroidal flows represent energy circulation patterns described by:
+$Ψ_{4D}(r,θ,φ,t) = \\int Ψ(x_1,x_2,x_3,ν,α,ρ,p_1,p_2,Ω)dνdαdρdp_1dp_2dΩ$
 
-$\\mathbf{v}(\\mathbf{r}) = \\nabla \\times (\\psi\\mathbf{B}) + \\nabla \\times \\nabla \\times (\\phi\\mathbf{B})$
+The electromagnetic 4-potential emerges as:
 
-where:
-- $\\psi$ is the poloidal flux function
-- $\\phi$ is the toroidal flux function
-- $\\mathbf{B}$ is the background magnetic field
+$A_μ = (\\frac{∂Ψ_{4D}}{∂t}, \\nabla Ψ_{4D})$
 
-#### 5. Fundamental Forces
-The four fundamental forces emerge through symmetry breaking of the higher-dimensional structure:
+Leading to the field tensor:
 
-1. **Electromagnetic Force**:
-   $U(1)$ symmetry: $F_{em} \\propto \\frac{q_1q_2}{r^2}$
+$F_{μν} = ∂_μA_ν - ∂_νA_μ$
 
-2. **Strong Nuclear Force**:
-   $SU(3)$ symmetry: $V_{strong}(r) = -\\frac{\\alpha_s\\hbar c}{r} + kr$
+#### 5. Unified 9D Lagrangian
+The full Lagrangian governing dynamics:
 
-3. **Weak Nuclear Force**:
-   $SU(2)$ symmetry: $F_{weak} \\propto G_F(\\bar{\\psi}\\gamma^\\mu\\psi)(\\bar{\\psi}\\gamma_\\mu\\psi)$
+$L_{9D} = -\\frac{1}{4}F_{AB}^aF_a^{AB} + i\\bar{Ψ}Γ^AD_AΨ - m\\bar{Ψ}Ψ + \\frac{1}{16πG_9}R_9 + L_{extra}$
 
-4. **Gravitational Force**:
-   Emergent from metric distortions: $F_g = -G\\frac{m_1m_2}{r^2}$
+where $L_{extra}$ accounts for extra-dimensional contributions:
+
+$L_{extra} = -\\frac{1}{4}G_{IJ}^bG_b^{IJ} + \\frac{1}{2}(∂_μΦ^b)^2 - V(Φ^b)$
+
+#### 6. Fundamental Forces
+The four fundamental forces emerge through symmetry breaking:
+
+1. **Electromagnetic Force** ($U(1)$ symmetry):
+   $F_{em} \\propto \\frac{q_1q_2}{r^2}$
+
+2. **Strong Nuclear Force** ($SU(3)$ symmetry):
+   $V_{strong}(r) = -\\frac{α_s\\hbar c}{r} + kr$
+
+3. **Weak Nuclear Force** ($SU(2)$ symmetry):
+   $F_{weak} \\propto G_F(\\bar{ψ}γ^μψ)(\\bar{ψ}γ_μψ)$
+
+4. **Gravitational Force** (emergent from metric distortions):
+   $F_g = -G\\frac{m_1m_2}{r^2}$
 
 #### Interactive Visualization Controls
 Use the sidebar controls to explore:
