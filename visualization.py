@@ -9,7 +9,7 @@ def create_hopf_visualization(x, y, z, field_strength, colorscale='Viridis'):
         colorscale=colorscale,
         colorbar=dict(title='Field Strength')
     )])
-    
+
     fig.update_layout(
         title='Hopf Fibration Visualization',
         scene=dict(
@@ -20,7 +20,7 @@ def create_hopf_visualization(x, y, z, field_strength, colorscale='Viridis'):
         width=800,
         height=800
     )
-    
+
     return fig
 
 def create_field_lines(Ex, Ey, Ez, Bx, By, Bz, density=10):
@@ -29,9 +29,9 @@ def create_field_lines(Ex, Ey, Ez, Bx, By, Bz, density=10):
     y = np.linspace(-5, 5, density)
     z = np.linspace(-5, 5, density)
     X, Y, Z = np.meshgrid(x, y, z)
-    
+
     fig = go.Figure()
-    
+
     # Electric field lines
     fig.add_trace(go.Cone(
         x=X.flatten(),
@@ -43,7 +43,7 @@ def create_field_lines(Ex, Ey, Ez, Bx, By, Bz, density=10):
         colorscale='Reds',
         name='Electric Field'
     ))
-    
+
     # Magnetic field lines
     fig.add_trace(go.Cone(
         x=X.flatten(),
@@ -55,7 +55,7 @@ def create_field_lines(Ex, Ey, Ez, Bx, By, Bz, density=10):
         colorscale='Blues',
         name='Magnetic Field'
     ))
-    
+
     fig.update_layout(
         title='Electromagnetic Field Lines',
         scene=dict(
@@ -66,21 +66,34 @@ def create_field_lines(Ex, Ey, Ez, Bx, By, Bz, density=10):
         width=800,
         height=800
     )
-    
+
     return fig
 
 def create_wave_function_plot(psi_4d):
     """Create visualization of wave function magnitude"""
-    fig = go.Figure(data=[go.Volume(
-        x=np.arange(psi_4d.shape[0]),
-        y=np.arange(psi_4d.shape[1]),
-        z=np.arange(psi_4d.shape[2]),
-        value=np.abs(psi_4d[:,:,:,0]),
+    # Average over time dimension to get 3D slice
+    psi_3d = np.mean(np.abs(psi_4d), axis=-1)
+
+    # Create coordinate grid
+    x = np.linspace(-5, 5, psi_3d.shape[0])
+    y = np.linspace(-5, 5, psi_3d.shape[1])
+    z = np.linspace(-5, 5, psi_3d.shape[2])
+    X, Y, Z = np.meshgrid(x, y, z, indexing='ij')
+
+    # Normalize wave function values for better visualization
+    psi_norm = (psi_3d - psi_3d.min()) / (psi_3d.max() - psi_3d.min())
+
+    fig = go.Figure(data=go.Volume(
+        x=X.flatten(),
+        y=Y.flatten(),
+        z=Z.flatten(),
+        value=psi_norm.flatten(),
         opacity=0.3,
         surface_count=15,
-        colorscale='Viridis'
-    )])
-    
+        colorscale='Viridis',
+        colorbar=dict(title='|Ψ|')
+    ))
+
     fig.update_layout(
         title='Wave Function Magnitude',
         scene=dict(
@@ -91,5 +104,5 @@ def create_wave_function_plot(psi_4d):
         width=800,
         height=800
     )
-    
+
     return fig
